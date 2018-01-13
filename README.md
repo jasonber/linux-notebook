@@ -1,3 +1,3 @@
 # linux-notebook
-#this file cantain my problem and answer 
+# this file cantain my problem and answer 
 
