@@ -1,0 +1,9 @@
+ubunt解决访问windows文件错误ntfsfix工具
+1.首先看电脑是否安装ntfsfix工具；没有直接apt-get 安装即可； 
+2.查看当前的文件系统信息，找到windows文件系统的硬件的路径：
+
+fdisk -l /dev/sda
+1
+找到文件格式为ntfs的，那就是windows下的各个硬盘，记住需要访问的硬盘的device，如/dev/sda5;
+
+使用工具ntfsfix /dev/sda5 即可，注意需要root权限的。sudo 一下就可以啦。
