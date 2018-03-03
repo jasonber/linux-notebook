@@ -1,0 +1,48 @@
+https://www.cnblogs.com/loid/p/5950212.html
+
+Linux安装mysql-python库时报错解决办法
+用pip安装mysql-python库的时候遇到如下报错
+
+复制代码
+root@LoidAir:~# pip install mysql-python
+Collecting mysql-python
+  Using cached MySQL-python-1.2.5.zip
+    Complete output from command python setup.py egg_info:
+    sh: 1: mysql_config: not found
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/tmp/pip-build-eLhjoy/mysql-python/setup.py", line 17, in <module>
+        metadata, options = get_config()
+      File "setup_posix.py", line 43, in get_config
+        libs = mysql_config("libs_r")
+      File "setup_posix.py", line 25, in mysql_config
+        raise EnvironmentError("%s not found" % (mysql_config.path,))
+    EnvironmentError: mysql_config not found
+    
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-eLhjoy/mysql-python/
+复制代码
+ 
+
+安装libmysqlclient-dev
+
+root@LoidAir:~# apt-get install libmysqlclient-dev
+ 
+
+重新安装mysql-python库
+
+复制代码
+root@LoidAir:~# pip install mysql-python
+Collecting mysql-python
+  Using cached MySQL-python-1.2.5.zip
+Building wheels for collected packages: mysql-python
+  Running setup.py bdist_wheel for mysql-python ... done
+  Stored in directory: /root/.cache/pip/wheels/38/a3/89/ec87e092cfb38450fc91a62562055231deb0049a029054dc62
+Successfully built mysql-python
+Installing collected packages: mysql-python
+Successfully installed mysql-python-1.2.5
+复制代码
+ 
+
+安装成功。
+
