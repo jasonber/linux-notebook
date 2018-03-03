@@ -43,6 +43,8 @@ Installing collected packages: mysql-python
 Successfully installed mysql-python-1.2.5
 复制代码
  
+不成功再
+python -m pip install mysqlclient
 
 安装成功。
 
