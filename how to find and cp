@@ -1,0 +1,39 @@
+https://www.cnblogs.com/howhy/p/6385736.html
+-exec
+    1.参数是一个一个传递的，传递一个参数执行一次rm
+    2.文件名有空格等特殊字符也能处理
+-xargs 
+    1.一次将参数传给命令，可以使用-n控制参数个数
+    2.处理特殊文件名需要采用如下方式：
+    find . -name "*.txt" print0 |xargs -0 rm {} 
+
+find /opt/test/ -type f -name "*.txt" -exec cp {} /tmp \;
+
+find /opt/test/ -type f -name "*.txt" | xargs -i cp {} /tmp
+
+https://www.linuxidc.com/Linux/2017-09/146692.htm
+用find查找/data目录下，以.txt文件结尾的文件并复制到/tmp下
+
+方法一
+
+find与|xargs是黄金搭档，-t参数指定目标目录
+
+[root@linuxidc ~]# find /data/ -type f -name"*.txt" | xargs cp -t /tmp
+
+方法二
+
+{}大括号里的内容为find命令找到的结果
+
+[root@linuxidc ~]# find /data/ -type f -name"*.txt" -exec cp {} /tmp \;
+
+方法三
+
+$()=` ` 存放命令的执行结果
+
+[root@linuxidc ~]# cp $(find /data/ -type f -name"*.txt")  /tmp
+
+方法四
+
+-i参数指定找到的结果放到{}中
+
+[root@linuxidc ~]# find/data/ -type f -name "*.txt" | xargs -i cp{} /tmp
