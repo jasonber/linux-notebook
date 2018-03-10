@@ -1,0 +1,158 @@
+http://blog.csdn.net/cosmoshua/article/details/76644029
+
+
+Ubuntu 16.04安装NVIDIA驱动
+原创 2017年08月03日 18:55:23 标签：ubuntu /nvidia /cuda 15851
+系统：Ubuntu 16.04。显卡：GTX 960，独显无集成显卡。
+
+0. 综述
+目前，知道3种安装N卡驱动的方法： 
+1. PPA源：最简便，但未必有最新驱动（亲测），或可能遇到问题（风闻）。
+
+sudo add-apt-repository ppa:xorg-edgers/ppa #添加ppa源
+sudo add-apt-repository ppa:graphics-drivers/ppa #添加ppa源
+sudo apt-get update #更新apt-get
+1
+2
+3
+然后进入：系统设置->软件和更新->附件驱动，选择更新的显卡驱动。 
+2. 安装CUDA时，顺便安装驱动：但未必是最新驱动（亲测）。 
+3. 去官网下载最新驱动，然后本地安装（本文用runfile）。
+
+1. 先卸载原有N卡驱动
+#for case1: original driver installed by apt-get:
+sudo apt-get remove --purge nvidia*
+
+#for case2: original driver installed by runfile:
+sudo chmod +x *.run
+sudo ./NVIDIA-Linux-x86_64-384.59.run --uninstall
+1
+2
+3
+4
+5
+6
+如果原驱动是用apt-get安装的，就用第1种方法卸载。 
+如果原驱动是用runfile安装的，就用–uninstall命令卸载。其实，用runfile安装的时候也会卸载掉之前的驱动，所以不手动卸载亦可。
+
+2. 禁用nouveau驱动
+sudo gedit /etc/modprobe.d/blacklist.conf
+1
+在文本最后添加：（禁用nouveau第三方驱动，之后也不需要改回来）
+
+blacklist nouveau
+options nouveau modeset=0
+1
+2
+然后执行：sudo update-initramfs -u
+
+重启后，执行：lsmod | grep nouveau。如果没有屏幕输出，说明禁用nouveau成功。
+
+3. 禁用X-Window服务
+sudo service lightdm stop #这会关闭图形界面，但不用紧张
+1
+按Ctrl-Alt+F1进入命令行界面，输入用户名和密码登录即可。
+
+小提示：在命令行输入：sudo service lightdm start ，然后按Ctrl-Alt+F7即可恢复到图形界面。
+
+4. 命令行安装驱动
+#给驱动run文件赋予执行权限：
+sudo chmod +x NVIDIA-Linux-x86_64-384.59.run
+#后面的参数非常重要，不可省略：
+sudo ./NVIDIA-Linux-x86_64-384.59.run –no-opengl-files
+1
+2
+3
+4
+–no-opengl-files：表示只安装驱动文件，不安装OpenGL文件。这个参数不可省略，否则会导致登陆界面死循环，英语一般称为”login loop”或者”stuck in login”。
+–no-x-check：表示安装驱动时不检查X服务，非必需。
+–no-nouveau-check：表示安装驱动时不检查nouveau，非必需。
+-Z, --disable-nouveau：禁用nouveau。此参数非必需，因为之前已经手动禁用了nouveau。
+-A：查看更多高级选项。
+必选参数解释：因为NVIDIA的驱动默认会安装OpenGL，而Ubuntu的内核本身也有OpenGL、且与GUI显示息息相关，一旦NVIDIA的驱动覆写了OpenGL，在GUI需要动态链接OpenGL库的时候就引起问题。
+
+之后，按照提示安装，成功后重启即可。 
+如果提示安装失败，不要急着重启电脑，重复以上步骤，多安装几次即可。
+
+Driver测试：
+
+nvidia-smi #若列出GPU的信息列表，表示驱动安装成功
+nvidia-settings #若弹出设置对话框，亦表示驱动安装成功
+1
+2
+5. 调整屏幕分别率（已成功）
+如果屏幕不能达到最佳分辨率时，可参见：http://blog.csdn.net/nostandby/article/details/69383543
+
+#查看显示器标识符：我的是DVI-I-0，在'connected'之前。
+xrandr
+#查看分辨率的属性：我要看1920x1080的分辨率，在'Modeline'之后。
+cvt 1920 1080
+#创建新分辨率模式：拷贝'Modeline'之后的信息即可。
+sudo xrandr --newmode "1920x1080"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+#为显示器添加分辨率模式：
+sudo xrandr --addmode DVI-I-0 "1920x1080"
+#将分辨率模式应用到显示器：
+sudo xrandr --output DVI-I-0 --mode "1920x1080"
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+PS：最终发现，劣质的显卡-显示器转接头，导致了显示器和分别率无法识别。换了转接头，无需上述步骤，分辨率自然恢复。
+
+6. 安装CUDA
+sudo ./cuda_8.0.61_375.26_linux.run --no-opengl-libs
+1
+--no-opengl-libs：表示只安装驱动文件，不安装OpenGL文件。必需参数，原因同上。注意：不是-no-opengl-files。
+--uninstall (deprecated)：用于卸载CUDA Driver（已废弃）。
+--toolkit：表示只安装CUDA Toolkit，不安装Driver和Samples。
+--help：查看更多高级选项。
+之后，按照提示安装即可。我依次选择了：
+
+accept #同意安装
+n #不安装Driver，因为已安装最新驱动
+y #安装CUDA Toolkit
+<Enter> #安装到默认目录
+y #创建安装目录的软链接
+n #不复制Samples，因为在安装目录下有/samples
+1
+2
+3
+4
+5
+6
+CUDA Sample测试：
+
+#编译并测试设备 deviceQuery：
+cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery
+sudo make
+./deviceQuery
+
+#编译并测试带宽 bandwidthTest：
+cd ../bandwidthTest
+sudo make
+./bandwidthTest
+1
+2
+3
+4
+5
+6
+7
+8
+9
+如果这两个测试的最后结果都是Result = PASS，说明CUDA安装成功啦。
+
+sudo ./cuda_8.0.61.2_linux.run #最后安装补丁CUDA官方补丁
+1
+参考文献： 
+http://blog.csdn.net/u012759136/article/details/53355781 
+http://blog.csdn.net/u012581999/article/details/52433609 
+http://hyichao.github.io/cv/2016/10/15/ubuntu-cuda-caffe.html 
+http://blog.csdn.net/nostandby/article/details/69383543 
+http://www.linuxdiyf.com/linux/24659.html
