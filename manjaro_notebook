@@ -1,2 +1,23 @@
+# cpu配置
+
 配置：https://my.oschina.net/langxSpirit/blog/1647000
 配置cpu：注意使用cpupower https://www.linuxidc.com/Linux/2012-01/50732.htm
+
+
+
+# GPU配置
+
+[驱动安装](https://forum.manjaro.org/t/solved-cannot-install-video-hybrid-intel-nvidia-390xx-bumblebee/49275)
+
+PURGE all nvidia related packages first:
+``sudo pacman -Rnsc nvidia-utils linux414-rt-nvidia``
+Switch to 390xx bumblebee profile:
+``sudo mhwd -f -r pci video-hybrid-intel-nvidia-bumblebee``
+`sudo mwhd -i pci video-hybrid-intel-nvidia-390xx-bumblebee`
+Install nvidia properly module for 390xx from available in pacman search FOR your kernel.
+
+Reboot.
+
+使用独显
+
+https://blog.csdn.net/yt4766269/article/details/77776938
