@@ -1,9 +1,10 @@
+配置：https://my.oschina.net/langxSpirit/blog/1647000
+
 # cpu配置
 
-配置：https://my.oschina.net/langxSpirit/blog/1647000
 配置cpu：注意使用cpupower https://www.linuxidc.com/Linux/2012-01/50732.htm
 
-
+cpupower 使用 https://access.redhat.com/documentation/zh-tw/red_hat_enterprise_linux/6/html/power_management_guide/core_infrastructure#C-States
 
 # GPU配置
 
