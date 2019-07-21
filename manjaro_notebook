@@ -85,5 +85,7 @@ mouse.vusb.enable = "TRUE"
 ```
 如果提示需要vax2
 将virtualHW.version = "16"改成10
-
+ 
+ # 关闭苹果sip
+ https://mrmad.com.tw/vmware-close-macos-sip
 
