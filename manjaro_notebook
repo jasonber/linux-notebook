@@ -88,4 +88,9 @@ mouse.vusb.enable = "TRUE"
  
  # 关闭苹果sip
  https://mrmad.com.tw/vmware-close-macos-sip
+ 
+# 手机同屏
+1. 安装adb
+2. android 开发工具
+3. 启动adb server
 
