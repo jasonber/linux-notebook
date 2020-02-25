@@ -94,3 +94,40 @@ mouse.vusb.enable = "TRUE"
 2. android 开发工具
 3. 启动adb server
 
+# manjaro KDE 安装心得
+1. [分区](https://blog.csdn.net/lj402159806/article/details/80218360)
+    / 20G
+    /boot 512mb
+    /boot/efi eps 512mb
+    /var 15G
+    /swap 4G
+    /home 剩下所有
+
+[2.更换源](http://www.bubuko.com/infodetail-3432414.html)
+  ```
+  # 选择国内的最快的源
+  sudo pacman-mirrors -i -c China -m rank
+  # 添加源
+  echo -e "\n[archlinuxcn]\nSigLevel = TrustAll\nServer = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/\$arch\n\n[antergos]\nSigLevel = TrustAll\nServer = https://mirrors.tuna.tsinghua.edu.cn/antergos/\$repo/\$arch\n"|sudo tee -a /etc/pacman.conf
+  # 升级
+  sudo pacman-Syy
+  # 安装archlinux签名钥匙和antergos签名钥匙
+  sudo pacman -S --noconfirm archlinuxcn-keyring antergos-keyring 
+  ```
+[3. 触摸板](https://blog.csdn.net/impressionyang/article/details/95591122)
+  ```
+  yay -S kcm-pointing-devices-git 
+  只适用于manjaro KDE。要新更新源。这个软件能实现触摸版的多种功能
+  ```
+[4. 中文输入法](https://www.jianshu.com/p/bf6fa0bdc17f)
+```
+安装
+sudo pacman -S fcitx-im  ---全部安裝
+sudo pacman -S fcitx -configtool   ----配置工具
+sudo pacman -S fcitx-rime    ----可选安装，fcitx默认已有中文输入
+
+配置~/.xprofile 如果没有可以创建
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+```
