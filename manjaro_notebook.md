@@ -95,7 +95,7 @@ mouse.vusb.enable = "TRUE"
 3. 启动adb server
 
 # manjaro KDE 安装心得
-1. [分区](https://blog.csdn.net/lj402159806/article/details/80218360)
+##1. [分区](https://blog.csdn.net/lj402159806/article/details/80218360)
     / 20G
     /boot 512mb
     /boot/efi eps 512mb
@@ -103,7 +103,7 @@ mouse.vusb.enable = "TRUE"
     /swap 4G
     /home 剩下所有
 
-[2.更换源](http://www.bubuko.com/infodetail-3432414.html)
+##[2.更换源](http://www.bubuko.com/infodetail-3432414.html)
   ```
   # 选择国内的最快的源
   sudo pacman-mirrors -i -c China -m rank
@@ -114,12 +114,12 @@ mouse.vusb.enable = "TRUE"
   # 安装archlinux签名钥匙和antergos签名钥匙
   sudo pacman -S --noconfirm archlinuxcn-keyring antergos-keyring 
   ```
-[3. 触摸板](https://blog.csdn.net/impressionyang/article/details/95591122)
+##[3. 触摸板](https://blog.csdn.net/impressionyang/article/details/95591122)
   ```
   yay -S kcm-pointing-devices-git 
   只适用于manjaro KDE。要新更新源。这个软件能实现触摸版的多种功能
   ```
-[4. 中文输入法](https://www.jianshu.com/p/bf6fa0bdc17f)
+##[4. 中文输入法](https://www.jianshu.com/p/bf6fa0bdc17f)
 ```
 安装
 sudo pacman -S fcitx-im  ---全部安裝
@@ -131,3 +131,27 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 ```
+##[5. oh-my-sh](https://blog.csdn.net/Xin_101/article/details/83819870)
+```
+切换bash和zsh
+# bash ⇒  zsh
+chsh -s /bin/zsh root或者直接zsh
+# zsh ⇒ bash
+chsh -s /bin/bash或者直接bash
+```
+##[6. kde美化](https://www.cnblogs.com/luoshuitianyi/p/10587788.html)
+
+#[pacman命令详解](https://blog.csdn.net/nangy2514/article/details/93194184)
+
+命令  |   解释|   备注|
+|:-|:-|:-|
+|pacman -Syu 	|对整个系统进行更新（常用） 	
+|pacman -Syy 	|强制更新 	
+|pacman -Syudd 	|使用 -dd跳过所有检测
+|pacman -S package_name 	|执行 pacman -S firefox 将安装 Firefox（常用） |你也可以同时安装多个包，只需以空格分隔包名即
+|pacman -Sy package_name 	|与上面命令不同的是，该命令将在同步包数据库后再执行安装。 	
+|pacman -Sv package_name 	|在显示一些操作信息后执行安装。 	
+|pacman -U local_package_name 	|安装本地包，其扩展名为pkg.tar.gz或pkg.tar.xz 	
+|pacman -U url 	|安装一个远程包（不在 pacman 配置的源里面） 	|例：pacman -U http://www.example.com/repo/example.pkg.tar.xz
+
+#[8. markdown 常用命令](https://www.cnblogs.com/shawWey/p/8931697.html)
