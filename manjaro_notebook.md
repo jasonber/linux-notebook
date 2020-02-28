@@ -155,3 +155,14 @@ chsh -s /bin/bash或者直接bash
 |pacman -U url 	|安装一个远程包（不在 pacman 配置的源里面） 	|例：pacman -U http://www.example.com/repo/example.pkg.tar.xz
 
 #[8. markdown 常用命令](https://www.cnblogs.com/shawWey/p/8931697.html)
+
+#[9. 查看磁盘大小](https://blog.csdn.net/davidhopper/article/details/80706457)
+
+#10. 系统备份
+```
+dd命令的使用 备份成镜像文件
+https://www.cnblogs.com/linuxde/p/8719253.html
+https://blog.csdn.net/xtggbmdk/article/details/82706380
+
+tar 备份所有系统文件
+https://blog.csdn.net/qq_41932665/article/details/88411812
