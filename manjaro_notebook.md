@@ -156,3 +156,55 @@ chsh -s /bin/bash或者直接bash
 
 #[8. markdown 常用命令](https://www.cnblogs.com/shawWey/p/8931697.html)
 `
+
+#[9. 查看磁盘大小](https://blog.csdn.net/davidhopper/article/details/80706457)
+
+#10. 系统备份
+```
+dd命令的使用 备份成镜像文件
+https://www.cnblogs.com/linuxde/p/8719253.html
+https://blog.csdn.net/xtggbmdk/article/details/82706380
+
+tar 备份所有系统文件
+https://blog.csdn.net/qq_41932665/article/details/88411812
+
+rsync 使用
+https://www.cnblogs.com/Gbeniot/p/5482366.html
+https://blog.csdn.net/jerry010101/article/details/88638738
+ sudo rsync -vPa / /media/zhang/usb/back_20200228 --exclude=/media/ --exclude=/sys/ --exclude=/proc/ --exclude=/mnt/ --exclude=/tmp/
+
+```
+
+#11.shell 
+
+#12.磁盘挂载
+linux下磁盘可以挂载在任何目录下
+df 查看磁盘的信息
+fdisk 格式化硬盘
+mount 挂载
+umount 弹出
+
+#[13. manjaro /根目录下的目录说明](https://www.cnblogs.com/lif323/p/10732905.html)
+
+#[14. 安装xmind](https://blog.csdn.net/weixin_44120683/article/details/88431749)
+```
+yay -S xmind
+xmind对jdk13兼容不好，会报错。所以要安装 jdk-8openjdk
+yay -S jdk-8openjdk
+转换默认的JDK
+archlinux-java status 查看有那些jdk
+archlinux-java set jdk-8openjdk 设置默认的jdk
+```
+#[15. wechat输入中文](http://blog.sciencenet.cn/blog-117412-1137251.html)
+```
+# 修改配置
+sudo vim  /opt/deepinwine/apps/Deepin-WeChat
+# 添加输入法
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+```
+#[16. wechat缩放](https://blog.csdn.net/weixin_36349646/article/details/102670624)
+```
+#env WINEPREFIX="$HOME/.deepinwine/Deepin-WeChat/"  winecfg 
+```
