@@ -207,3 +207,16 @@ export XMODIFIERS="@im=fcitx"
 ```
 #env WINEPREFIX="$HOME/.deepinwine/Deepin-WeChat/"  winecfg 
 ```
+
+# [17. 安装anbox]()
+linux的安卓模拟器
+
+#[18. 下载工具](https://linux.cn/article-7369-1.html)
+wget curl aria2
+
+#[19. wget](https://blog.csdn.net/qq_41551450/article/details/94596599)
+
+#[20. ssh使用](https://www.cnblogs.com/ftl1012/p/ssh.html)
+```bash
+ssh -p[port] [user@]hostname  
+```
